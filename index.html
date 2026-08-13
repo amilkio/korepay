@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KORE PAY - Inscription</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+  body{background:linear-gradient(135deg,#2563eb,#16a34a);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .card{background:white;width:100%;max-width:420px;padding:30px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+  .logo{text-align:center;margin-bottom:20px}
+  .logo h1{color:#2563eb;font-size:28px}
+  .logo p{color:#16a34a;font-size:13px}
+  .contact{font-size:12px;color:#2563eb;font-weight:bold;margin-top:5px}
+  h2{text-align:center;margin-bottom:20px;color:#333}
+  form{display:flex;flex-direction:column;gap:14px}
+  input,select{padding:14px;border:1px solid #ddd;border-radius:10px;font-size:15px}
+  input:focus{border-color:#16a34a;outline:none}
+  button{padding:14px;background:#25D366;color:white;border:none;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+  button:hover{background:#128C7E}
+  .alert{display:none;background:#dcfce7;color:#166534;padding:12px;border-radius:8px;text-align:center;margin-top:10px;border:1px solid #bbf7d0}
+  .info{font-size:12px;color:#666;text-align:center;margin-top:10px}
+  footer{text-align:center;font-size:11px;color:#999;margin-top:15px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">
+    <h1>KORE PAY</h1>
+    <p>Transfert Rapide & Sécurisé</p>
+    <p class="contact">Service Client: +229 45 01 03 95</p>
+  </div>
+
+  <h2>Créer un compte</h2>
+  <form id="signupForm">
+    <input type="text" id="nom" placeholder="Nom complet" required>
+    <input type="tel" id="tel" placeholder="Ton numéro WhatsApp" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <select id="pays" required>
+      <option value="">-- Choisir Pays --</option>
+      <option>Bénin</option>
+      <option>Togo</option>
+      <option>Côte d'Ivoire</option>
+      <option>Cameroun</option>
+      <option>Sénégal</option>
+    </select>
+    <button type="submit">
+      📱 S'inscrire et Valider sur WhatsApp
+    </button>
+  </form>
+
+  <div class="alert" id="alert">✅ Redirection vers WhatsApp de KORE PAY +229 45 01 03 95...</div>
+  <p class="info">Notre équipe va valider ton compte sous 10min</p>
+  <footer>© 2026 KORE PAY. Tous droits réservés.</footer>
+</div>
+
+<script>
+const NUMERO_SOCIETE = "22945010395"; // +229 45 01 03 95 sans espaces
+
+document.getElementById('signupForm').addEventListener('submit',function(e){
+  e.preventDefault();
+
+  const nom = document.getElementById('nom').value;
+  const tel = document.getElementById('tel').value;
+  const email = document.getElementById('email').value;
+  const pays = document.getElementById('pays').value;
+
+  // Message qui part sur WhatsApp
+  const message = `🔔 NOUVELLE INSCRIPTION KORE PAY 🔔%0A%0A
+Nom: ${nom}%0A
+Tel Client: ${tel}%0A
+Email: ${email}%0A
+Pays: ${pays}%0A%0A
+Service: +229 45 01 03 95%0A
+Merci de valider mon compte.`;
+
+  // Lien WhatsApp avec ton numéro complet
+  const whatsappUrl = `https://wa.me/${NUMERO_SOCIETE}?text=${message}`;
+
+  document.getElementById('alert').style.display='block';
+
+  // Ouvre WhatsApp après 1 seconde
+  setTimeout(()=>{
+    window.open(whatsappUrl, '_blank');
+  },1000);
+})
+</script>
+</body>
+    </html>
